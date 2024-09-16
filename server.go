@@ -44,9 +44,9 @@ func handleQUIC(certFile, keyFile string) {
 	}
 
 	// 使用 TLS，配置证书和私钥文件
-	log.Println("Starting QUIC server on :4433")
+	log.Println("Starting QUIC server on 0.0.0.0:4433")
 	if err := server.ListenAndServeTLS(certFile, keyFile); err != nil {
-		log.Fatalf("Failed to start QUIC server: %v", err)
+		log.Fatalf("Failed to start QUIC server: %v\n", err)
 	}
 }
 
@@ -66,7 +66,7 @@ func handleWebSocket(w http.ResponseWriter, r *http.Request) {
 	// 将 HTTP 连接升级为 WebSocket 连接
 	conn, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
-		log.Printf("WebSocket upgrade error: %v", err)
+		log.Printf("WebSocket upgrade error: %v\n", err)
 		http.Error(w, "WebSocket upgrade failed", http.StatusInternalServerError)
 		return
 	}
@@ -99,7 +99,7 @@ func startWebSocketServer(certFile, keyFile string) {
 	}
 
 	go func() {
-		log.Println("Starting WebSocket server on wss://localhost:8888/ws")
+		log.Println("Starting WebSocket server on wss://0.0.0.0:8888/ws")
 		if err := server.ListenAndServeTLS(certFile, keyFile); err != nil && err != http.ErrServerClosed {
 			log.Fatalf("WebSocket server error: %v", err)
 		}
