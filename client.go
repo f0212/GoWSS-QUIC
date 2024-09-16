@@ -125,6 +125,7 @@ func main() {
 		log.Fatalf("WebSocket dial error: %v", err)
 		return
 	}
+
 	defer conn.Close()
 
 	log.Println("Connected to WebSocket server\n")
