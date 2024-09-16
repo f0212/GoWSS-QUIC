@@ -1,5 +1,7 @@
 # WebSocket & QUIC Client-Server Project
 
+- [中文](README_zh.md)
+
 ## Overview
 
 This project demonstrates a Go-based client-server architecture where communication happens through WebSocket, and certain events trigger HTTP/3 (QUIC) requests. The server uses WebSocket to exchange data, while HTTP/3 is used to send requests over the QUIC protocol. 
