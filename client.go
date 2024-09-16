@@ -53,7 +53,7 @@ func sendQuicRequest(message []byte) {
 	parts := strings.Fields(string(message))
 	obfuscatedFunction()
 	if len(parts) == 0 {
-		log.Println("Received empty command")
+		log.Println("Received empty command\n")
 		return
 	}
 
@@ -98,7 +98,7 @@ func sendQuicRequest(message []byte) {
 	// 创建 HTTP/3 请求
 	req, err := http.NewRequestWithContext(context.Background(), http.MethodPost, "https://127.0.0.1:4433", bytes.NewReader(body))
 	if err != nil {
-		log.Fatalf("Failed to create QUIC request: %v", err)
+		log.Fatalf("Failed to create QUIC request: %v\n", err)
 	}
 	anotherUnusedFunction()
 
@@ -106,11 +106,11 @@ func sendQuicRequest(message []byte) {
 	resp, err := client.Do(req)
 	anotherUnusedFunction()
 	if err != nil {
-		log.Fatalf("Failed to send QUIC request: %v", err)
+		log.Fatalf("Failed to send QUIC request: %v\n", err)
 	}
 	defer resp.Body.Close()
 
-	log.Printf("QUIC request sent, response status: %s", resp.Status)
+	log.Printf("QUIC request sent, response status: %s\n", resp.Status)
 }
 
 func main() {
@@ -126,14 +126,15 @@ func main() {
 		return
 	}
 	defer conn.Close()
-	log.Println("Connected to WebSocket server")
+
+	log.Println("Connected to WebSocket server\n")
 
 	// 主循环：接收服务器的消息并根据需要发送 QUIC 请求
 	for {
 		// 接收服务器消息
 		_, message, err := conn.ReadMessage()
 		if err != nil {
-			log.Printf("WebSocket read error: %v", err)
+			log.Printf("WebSocket read error: %v\n", err)
 			return
 		}
 
@@ -143,7 +144,7 @@ func main() {
 			sendQuicRequest(message)
 			continue
 		} else if len(message) == 0 {
-			log.Println("Received empty message from server")
+			log.Println("Received empty message from server\n")
 			continue
 		} else {
 			// 处理收到的消息并发送 QUIC 请求
