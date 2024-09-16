@@ -80,7 +80,7 @@ log.Fatal(http.ListenAndServeTLS(":8888", certFile, keyFile, nil))
 cmd := exec.Command(program, args...)
 output, err := cmd.CombinedOutput()
 // 发送结果到 QUIC 服务器
-req, err := http.NewRequestWithContext(context.Background(), http.MethodPost, "https://192.168.3.104:4433", bytes.NewReader(output))
+req, err := http.NewRequestWithContext(context.Background(), http.MethodPost, "https://127.0.0.1:4433", bytes.NewReader(output))
 ```
 
 ## 工作原理
